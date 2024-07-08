@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
-  resources :users, only: %i(new create show)
+  resources :users, only: %i(new create show edit update index destroy)
 end

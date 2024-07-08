@@ -1,6 +1,9 @@
 source "https://rubygems.org"
 git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
+gem "bootstrap-sass", "3.4.1"
+gem "sassc-rails"
+
 ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

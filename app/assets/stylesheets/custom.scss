@@ -78,6 +78,7 @@ aside {
   margin-top: 15px;
 }
 
+/* forms */
 input,
 textarea,
 select,
@@ -107,4 +108,9 @@ input {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+/* Dropdown menu */
+.dropdown-menu.active {
+  display: block;
 }

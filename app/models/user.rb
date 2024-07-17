@@ -5,8 +5,13 @@ class User < ApplicationRecord
   validates :email, presence: true,
                     length: {maximum: Settings.email.max_length},
                     format: {with: Regexp.new(Settings.email.valid_email_regex)}
+  validates :password, presence: true,
+                       length: {minimum: Settings.password.min_length},
+                       allow_nil: true
   has_secure_password
   attr_accessor :remember_token
+
+  default_scope -> {order created_at: :asc}
 
   # Returns the hash digest of the given string.
   class << self

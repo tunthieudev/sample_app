@@ -5,3 +5,12 @@ email:
   max_length: 255
   valid_email_regex: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+password:
+  min_length: 6
+
+user:
+  avatar:
+    size: 80
+
+pagy:
+  items: 10

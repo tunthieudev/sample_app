@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @pagy, @users = pagy(User.all, items: Settings.pagy.items)
+    @pagy, @users = pagy(User.sorted_by_created_at, items: Settings.pagy.items)
   end
 
   def show; end
@@ -17,11 +17,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = "Welcome to the sample app!"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url, status: :see_other
     else
+      flash[:error] = @user.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -48,10 +48,10 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit :name,
+    params.require(:user).permit(:name,
                                  :email,
                                  :password,
-                                 :password_confirmation
+                                 :password_confirmation)
   end
 
   def find_user
@@ -70,6 +70,7 @@ class UsersController < ApplicationController
     redirect_to login_url
   end
 
+  # Confirms the correct user.
   def correct_user
     return if current_user? @user
 

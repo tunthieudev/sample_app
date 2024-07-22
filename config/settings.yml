@@ -15,4 +15,14 @@ user:
 pagy:
   items: 10
 
+micropost:
+  content:
+    max_length: 140
+
+image:
+  max_width: 200
+  max_height: 200
+
 digit_2: 2
+
+digit_5: 5
